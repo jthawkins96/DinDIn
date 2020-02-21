@@ -1,0 +1,6 @@
+<div>
+  <div *ngFor="let mealOption of mealOptions">
+    <h4>{{ mealOption.title }}</h4>
+    <button type="button" (click)="vote(mealOption.id)">Vote</button>
+  </div>
+</div>

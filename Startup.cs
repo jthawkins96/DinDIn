@@ -6,6 +6,7 @@ using Microsoft.AspNetCore.SpaServices.AngularCli;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System;
 
 namespace DinDin
 {
@@ -59,11 +60,11 @@ namespace DinDin
 
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapHub<TestHub>("/test-hub");
-
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
+
+                endpoints.MapHub<TestHub>("/api/test-hub");
             });
 
             app.UseSpa(spa =>
@@ -75,7 +76,7 @@ namespace DinDin
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200");
                 }
             });
         }
