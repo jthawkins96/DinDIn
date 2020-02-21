@@ -16,26 +16,23 @@ export class SignalRService {
 
   private hubConnection: signalR.HubConnection;
 
-  public startConnection = () => {
+  public startConnection = (hubName: string) => {
     this.hubConnection = new signalR.HubConnectionBuilder()
-      .withUrl(`${ this.apiBaseUrl }/test-hub`)
+      .withUrl(`${ this.apiBaseUrl }/${ hubName }`)
       .build();
 
     this.hubConnection
       .start()
-      .then(() => console.log('Connection started'))
-      .catch(err => console.log('Error while starting connection: ' + err));
+      .then(() => console.log(`%cConnection to ${ hubName } started.`, 'color:green'))
+      .catch(err => console.log(`%cError while starting connection: ${ err }`, 'color:red'));
   };
 
-  public broadcastData = () => {
-    this.hubConnection.invoke("broadcasttestdata", "new data")
+  public invokeHubMethod = (methodName: string, data) => {
+    this.hubConnection.invoke(methodName, data)
       .catch(err => console.log(err))
   }
 
-  public addTestEventListener = () => {
-    this.hubConnection.on('testevent', data => {
-      this.data = data;
-      console.log(data);
-    });
+  public addHubListener = (eventName: string, cb) => {
+    this.hubConnection.on(eventName, cb);
   };
 }

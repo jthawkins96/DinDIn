@@ -64,7 +64,7 @@ namespace DinDin
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
 
-                endpoints.MapHub<TestHub>("/api/test-hub");
+                endpoints.MapHub<VotingHub>("/api/voting-hub");
             });
 
             app.UseSpa(spa =>

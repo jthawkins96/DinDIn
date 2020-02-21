@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { SignalRService } from 'src/app/_services/signal-r.service';
 
 @Component({
@@ -8,7 +8,7 @@ import { SignalRService } from 'src/app/_services/signal-r.service';
 })
 export class VotingManagerComponent implements OnInit {
 
-  mealOptions: any;
+  @Input() mealOptions: any;
 
   constructor(private signalRService: SignalRService) { }
 
@@ -16,7 +16,7 @@ export class VotingManagerComponent implements OnInit {
   }
 
   vote(mealId: number) {
-
+    this.signalRService.invokeHubMethod('voteonmeal', mealId);
   }
 
 }

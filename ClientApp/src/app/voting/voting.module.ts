@@ -8,6 +8,7 @@ import { VotingManagerComponent } from './voting-manager/voting-manager.componen
   declarations: [VotingManagerComponent],
   imports: [
     CommonModule
-  ]
+  ],
+  exports: [VotingManagerComponent]
 })
 export class VotingModule { }
