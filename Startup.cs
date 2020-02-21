@@ -1,3 +1,4 @@
+using DinDin.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.HttpsPolicy;
@@ -21,6 +22,9 @@ namespace DinDin
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddControllersWithViews();
+
+            services.AddSignalR();
+
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
             {
@@ -51,8 +55,12 @@ namespace DinDin
 
             app.UseRouting();
 
+
+
             app.UseEndpoints(endpoints =>
             {
+                endpoints.MapHub<TestHub>("/test-hub");
+
                 endpoints.MapControllerRoute(
                     name: "default",
                     pattern: "{controller}/{action=Index}/{id?}");
