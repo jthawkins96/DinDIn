@@ -1,12 +1,11 @@
+using DinDin.DAL;
 using DinDin.Hubs;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.SpaServices.AngularCli;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using System;
 
 namespace DinDin
 {
@@ -25,6 +24,10 @@ namespace DinDin
             services.AddControllersWithViews();
 
             services.AddSignalR();
+
+            services.AddDbContextPool<DinDinContext>(options => {
+                options.UseSqlServer(Configuration.GetConnectionString("Default"));
+            });
 
             // In production, the Angular files will be served from this directory
             services.AddSpaStaticFiles(configuration =>
