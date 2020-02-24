@@ -7,6 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
 import { VoteModule } from './modules/vote/vote.module';
+import { AdminModule } from './modules/admin/admin.module';
 
 @NgModule({
   declarations: [
@@ -18,7 +19,8 @@ import { VoteModule } from './modules/vote/vote.module';
     FormsModule,
     CoreModule,
     HomeModule,
-    VoteModule
+    VoteModule,
+    AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
