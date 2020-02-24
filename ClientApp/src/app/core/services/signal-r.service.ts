@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import * as signalR from "@aspnet/signalr";
-import { TestModel } from '../_interfaces/test.model';
 import { environment } from 'src/environments/environment';
 
 @Injectable({
@@ -11,8 +10,6 @@ export class SignalRService {
   apiBaseUrl: string = environment.apiUrl;
 
   constructor() {}
-
-  public data: TestModel[];
 
   private hubConnection: signalR.HubConnection;
 

@@ -1,13 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { SignalRService } from 'src/app/_services/signal-r.service';
-import { MealOption } from 'src/app/_interfaces/meal-option.model';
+import { Component, OnInit, Input } from '@angular/core';
+import { SignalRService } from 'src/app/core/services/signal-r.service';
+import { MealOption } from 'src/app/shared/models/meal-option.model';
 
 @Component({
-  selector: 'app-vote-page',
-  templateUrl: './vote-page.component.html',
-  styleUrls: ['./vote-page.component.css']
+  selector: 'app-voting-manager',
+  templateUrl: './voting-manager.component.html',
+  styleUrls: []
 })
-export class VotePageComponent implements OnInit {
+export class VotingManagerComponent implements OnInit {
 
   mealOptions: MealOption[] = [
     { id: 1, title: 'Chicken', votes: 0 },
@@ -22,10 +22,15 @@ export class VotePageComponent implements OnInit {
     this.signalRService.addHubListener('mealvote', this.updateVoteCounts.bind(this));
   }
 
+  vote(mealId: number) {
+    this.signalRService.invokeHubMethod('voteonmeal', mealId);
+  }
+
   updateVoteCounts(mealId: number) {
     this.mealOptions.forEach(mealOption => {
       if(mealOption.id === mealId)
         mealOption.votes++;
     });
   }
+
 }
