@@ -3,5 +3,6 @@ export const validationMessages = {
   required: 'This field is required',
   email: 'Please enter a valid email.',
   phone: 'Please enter a number in the format xxx-xxx-xxxx.',
-  pattern: 'Invalid format.'
+  pattern: 'Invalid format.',
+  passwordMismatch: 'Passwords do not match.'
 }
