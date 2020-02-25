@@ -30,7 +30,9 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/assets/scss/styles.scss"
+              "src/assets/scss/styles.scss",
+              "node_modules/alertifyjs/build/css/alertify.min.css",
+              "node_modules/alertifyjs/build/css/themes/bootstrap.min.css"
             ],
             "scripts": []
           },

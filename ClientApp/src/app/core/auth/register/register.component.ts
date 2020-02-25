@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild, ViewChildren } from '@angular/core';
-import { NgForm, FormControl, NgModel } from '@angular/forms';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { NgForm, NgModel } from '@angular/forms';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -8,9 +8,9 @@ import { AuthService } from '../auth.service';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
-  @ViewChild('registerForm') registerForm: NgForm;
-  @ViewChild('username') username: NgModel;
-  @ViewChild('password') password: NgModel;
+  @ViewChild('registerForm', { static: false}) registerForm: NgForm;
+  @ViewChild('username', { static: false}) username: NgModel;
+  @ViewChild('password', { static: false}) password: NgModel;
   errorMessage: string;
 
   constructor(private authService: AuthService) {}

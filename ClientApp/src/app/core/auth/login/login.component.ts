@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { AuthService } from '../auth.service';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AlertifyService } from '../../services/alertify.service';
 
 @Component({
   selector: 'app-login',
@@ -9,9 +10,9 @@ import { Router } from '@angular/router';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  @ViewChild('loginForm') loginForm: NgForm;
+  @ViewChild('loginForm', { static: false }) loginForm: NgForm;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private alertifyService: AlertifyService) {}
 
   ngOnInit(): void {}
 
@@ -21,6 +22,7 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       response => {
+        this.alertifyService.success("Welcome back!");
         localStorage.setItem('token', response.token);
         this.router.navigate(['/']);
       },
