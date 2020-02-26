@@ -37,9 +37,7 @@ export class AuthService {
     const isTokenExpired = this.jwtHelper.isTokenExpired(token);
     this.isLoggedIn.next(!isTokenExpired);
 
-    if(!isTokenExpired) {
+    if(!isTokenExpired)
       this.decodedToken = this.jwtHelper.decodeToken(token);
-      console.log(this.decodedToken)
-    }
   }
 }
