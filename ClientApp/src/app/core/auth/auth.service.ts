@@ -10,9 +10,10 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class AuthService {
-  authBaseUrl: string = `${environment.apiUrl}/auth`;
-  jwtHelper: JwtHelperService = new JwtHelperService();
-  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
+  decodedToken: any;
+  authBaseUrl = `${environment.apiUrl}/auth`;
+  jwtHelper = new JwtHelperService();
+  isLoggedIn = new BehaviorSubject<boolean>(false);
 
   constructor(private httpClient: HttpClient) {
     this.autoLogin();
@@ -35,5 +36,10 @@ export class AuthService {
     const token = localStorage.getItem('token');
     const isTokenExpired = this.jwtHelper.isTokenExpired(token);
     this.isLoggedIn.next(!isTokenExpired);
+
+    if(!isTokenExpired) {
+      this.decodedToken = this.jwtHelper.decodeToken(token);
+      console.log(this.decodedToken)
+    }
   }
 }
