@@ -24,6 +24,7 @@ export class LoginComponent implements OnInit {
       response => {
         this.alertifyService.success("Welcome back!");
         localStorage.setItem('token', response.token);
+        this.authService.isLoggedIn.next(true);
         this.router.navigate(['/']);
       },
       error => {

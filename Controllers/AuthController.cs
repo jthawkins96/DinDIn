@@ -6,6 +6,7 @@ using AutoMapper;
 using DinDin.Core.Contracts;
 using DinDin.Core.Models;
 using DinDin.DTO;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

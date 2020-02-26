@@ -6,6 +6,7 @@ using DinDin.DAL.Repositories;
 using DinDin.Hubs;
 using DinDin.Mapping;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -44,7 +45,9 @@ namespace DinDin
                     options.TokenValidationParameters = new TokenValidationParameters
                     {
                         ValidateIssuerSigningKey = true,
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:TokenSecret").Value))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.ASCII.GetBytes(Configuration.GetSection("AppSettings:TokenSecret").Value)),
+                        ValidateAudience = false,
+                        ValidateIssuer = false
                     };
                 });
 
