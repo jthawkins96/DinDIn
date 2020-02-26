@@ -2,9 +2,9 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { JwtHelperService } from '@auth0/angular-jwt';
 
-
 import { environment } from '../../../environments/environment';
 import { AuthToken } from 'src/app/shared/models/authToken.model';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,11 @@ import { AuthToken } from 'src/app/shared/models/authToken.model';
 export class AuthService {
   authBaseUrl: string = `${environment.apiUrl}/auth`;
   jwtHelper: JwtHelperService = new JwtHelperService();
+  isLoggedIn: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
 
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient) {
+    this.autoLogin();
+  }
 
   login(username: string, password: string) {
     return this.httpClient.post<AuthToken>(`${this.authBaseUrl}/login`, { username, password });
@@ -24,11 +27,13 @@ export class AuthService {
   }
 
   logout(): void {
-    localStorage.removeItem('token')
+    localStorage.removeItem('token');
+    this.isLoggedIn.next(false);
   }
 
-  isLoggedIn(): boolean {
+  autoLogin(): void {
     const token = localStorage.getItem('token');
-    return !this.jwtHelper.isTokenExpired(token);
+    const isTokenExpired = this.jwtHelper.isTokenExpired(token);
+    this.isLoggedIn.next(!isTokenExpired);
   }
 }
