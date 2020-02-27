@@ -25,7 +25,7 @@ namespace DinDin.Controllers
             _mapper = mapper;
         }
 
-        [HttpGet("{searchTerm}")]
+        [HttpGet("FindUsers/{searchTerm}")]
         public IActionResult FindUsers(string searchTerm)
         {
             var users = _userRepo.FindUsers(searchTerm);
@@ -37,6 +37,13 @@ namespace DinDin.Controllers
         {
             var users = _userRepo.GetUsers();
             return Ok(_mapper.Map<List<UserDto>>(users));
+        }
+
+        [HttpGet("GetGroups/{userId}")]
+        public IActionResult GetGroups(string userId)
+        {
+            var userGroups = _userRepo.GetGroups(userId);
+            return Ok(_mapper.Map<List<GroupRoleDto>>(userGroups));
         }
     }
 }

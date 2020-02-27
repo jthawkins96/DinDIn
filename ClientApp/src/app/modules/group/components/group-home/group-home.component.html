@@ -1,0 +1,14 @@
+<div class="d-flex justify-content-between">
+  <h3>My Groups</h3>
+  <button class="btn btn-success" type="button" [routerLink]="['add-group']">Create New Group</button>
+</div>
+<hr />
+<ul class="list-group">
+  <li class="list-group-item d-flex justify-content-between" *ngFor="let group of groups">
+    <span>{{ group.name }}</span>
+    <div *ngIf="group.roleId === 1">
+      <i class="fas fa-edit mr-2"></i>
+      <i class="far fa-trash-alt"></i>
+    </div>
+  </li>
+</ul>

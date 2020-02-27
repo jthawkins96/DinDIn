@@ -11,5 +11,6 @@ namespace DinDin.Core.Contracts
         Task<User> Find(string username);
         ICollection<User> FindUsers(string searchTerm);
         ICollection<User> GetUsers();
+        ICollection<UserGroup> GetGroups(string userId);
     }
 }

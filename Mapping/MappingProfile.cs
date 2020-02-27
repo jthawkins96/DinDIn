@@ -14,8 +14,10 @@ namespace DinDin.Mapping
             CreateMap<User, RegisterUserDto>().ReverseMap();
             CreateMap<User, UserDto>().ReverseMap();
             CreateMap<RegisterUserDto, UserDto>().ReverseMap();
-            CreateMap<GroupDto, Group>().ForMember(dest => dest.UserGroups, src => src.MapFrom(g => g.Members)).ReverseMap();
+            CreateMap<GroupDto, Group>().ForMember(dest => dest.UserGroups, src => src.MapFrom(g => g.Members));
+            CreateMap<Group, GroupDto>().ForMember(dest => dest.Members, src => src.MapFrom(g => g.UserGroups));
             CreateMap<UserGroupDto, UserGroup>().ReverseMap();
+            CreateMap<UserGroup, GroupRoleDto>().ForMember(dest => dest.Name, src => src.MapFrom(g => g.Group.Name));
         }
     }
 }

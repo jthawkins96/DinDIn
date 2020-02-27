@@ -9,6 +9,7 @@ import { HomeModule } from './modules/home/home.module';
 import { VoteModule } from './modules/vote/vote.module';
 import { AdminModule } from './modules/admin/admin.module';
 import { GroupModule } from './modules/group/group.module';
+import { AppRoutingModule } from './app-routing.module';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { GroupModule } from './modules/group/group.module';
     HomeModule,
     VoteModule,
     AdminModule,
-    GroupModule
+    GroupModule,
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

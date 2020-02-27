@@ -27,6 +27,14 @@ namespace DinDin.DAL.Repositories
             return _dbContext.Users.Where(user => user.UserName.StartsWith(searchTerm)).ToList();
         }
 
+        public ICollection<UserGroup> GetGroups(string userId)
+        {
+            return _dbContext.UserGroup
+                .Include(ug => ug.Group)
+                .Where(ug => ug.UserId == userId)
+                .ToList();
+        }
+
         public ICollection<User> GetUsers()
         {
             return _dbContext.Users.ToList();
