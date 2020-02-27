@@ -6,13 +6,15 @@ import { VoteComponent } from '../modules/vote/pages/vote/vote.component';
 import { AddRecipeComponent } from '../modules/admin/pages/add-recipe/add-recipe.component';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
+import { AddGroupComponent } from '../modules/group/components/add-group/add-group.component';
 
 const routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'vote', component: VoteComponent },
   { path: 'add-recipe', component: AddRecipeComponent },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: 'add-group', component: AddGroupComponent }
 ];
 
 @NgModule({

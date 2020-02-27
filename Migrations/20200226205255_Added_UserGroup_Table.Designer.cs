@@ -4,14 +4,16 @@ using DinDin.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DinDin.Migrations
 {
     [DbContext(typeof(DinDinContext))]
-    partial class DinDinContextModelSnapshot : ModelSnapshot
+    [Migration("20200226205255_Added_UserGroup_Table")]
+    partial class Added_UserGroup_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -31,22 +33,7 @@ namespace DinDin.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Groups");
-                });
-
-            modelBuilder.Entity("DinDin.Core.Models.GroupRole", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("GroupRole");
+                    b.ToTable("Group");
                 });
 
             modelBuilder.Entity("DinDin.Core.Models.Role", b =>
@@ -151,8 +138,8 @@ namespace DinDin.Migrations
                     b.Property<int>("GroupId")
                         .HasColumnType("int");
 
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
+                    b.Property<string>("RoleId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("UserId")
                         .HasColumnType("nvarchar(450)");
@@ -280,11 +267,9 @@ namespace DinDin.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("DinDin.Core.Models.GroupRole", "Role")
+                    b.HasOne("DinDin.Core.Models.Role", "Role")
                         .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RoleId");
 
                     b.HasOne("DinDin.Core.Models.User", "User")
                         .WithMany("UserGroups")

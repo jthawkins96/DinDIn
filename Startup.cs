@@ -53,6 +53,8 @@ namespace DinDin
 
             services.AddAutoMapper(typeof(MappingProfile));
             services.AddScoped<IAuthRepository, AuthRepository>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IGroupRepository, GroupRepository>();
 
             services.AddControllersWithViews();
 

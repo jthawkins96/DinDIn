@@ -13,6 +13,8 @@ namespace DinDin.DAL
         IdentityUserClaim<string>, UserRole, IdentityUserLogin<string>, 
         IdentityRoleClaim<string>, IdentityUserToken<string>>
     {
+        public DbSet<Group> Groups { get; set; }
+
         public DinDinContext(DbContextOptions<DinDinContext> options)
             : base(options)
         {
