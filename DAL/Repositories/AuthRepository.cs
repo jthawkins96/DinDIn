@@ -84,5 +84,11 @@ namespace DinDin.DAL.Repositories
                 SigningCredentials = signingCredentials
             };
         }
+
+        public JwtSecurityToken ReadToken(string token)
+        {
+            var handler = new JwtSecurityTokenHandler();
+            return handler.ReadToken(token) as JwtSecurityToken;
+        }
     }
 }

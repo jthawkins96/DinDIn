@@ -15,4 +15,8 @@ export class GroupClientService {
   addNewGroup(group: Group) {
     return this.httpClient.post(this.groupApiUrl, group);
   }
+
+  delete(groupId: number) {
+    return this.httpClient.delete(`${this.groupApiUrl}/${groupId}`);
+  }
 }

@@ -10,5 +10,7 @@ namespace DinDin.Core.Contracts
     {
         Task<Group> Add(Group newGroup);
         Task<Group> Find(int groupId);
+        void Delete(int groupId);
+        bool UserIsOwner(int groupId, string userId);
     }
 }
