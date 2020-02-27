@@ -7,6 +7,7 @@ namespace DinDin.DTO
 {
     public class UserGroupDto
     {
+        public string Username { get; set; }
         public string UserId { get; set; }
         public int RoleId { get; set; }
     }

@@ -1,5 +1,6 @@
 ﻿using DinDin.Core.Contracts;
 using DinDin.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -31,9 +32,12 @@ namespace DinDin.DAL.Repositories
             _dbContext.SaveChanges();
         }
 
-        public async Task<Group> Find(int groupId)
+        public Group Find(int groupId)
         {
-            return await _dbContext.Groups.FindAsync(groupId);
+            return _dbContext.Groups
+                .Include(g => g.UserGroups)
+                .ThenInclude(ug => ug.User)
+                .Single(g => g.Id == groupId);
         }
 
         public bool UserIsOwner(int groupId, string userId)

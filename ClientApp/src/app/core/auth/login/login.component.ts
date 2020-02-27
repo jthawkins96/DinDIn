@@ -22,8 +22,8 @@ export class LoginComponent implements OnInit {
 
     this.authService.login(username, password).subscribe(
       response => {
-        this.alertifyService.success("Welcome back!");
-        localStorage.setItem('token', response.token);
+        this.alertifyService.success('Welcome back!');
+        this.authService.setToken(response.token);
         this.authService.isLoggedIn.next(true);
         this.router.navigate(['/']);
       },

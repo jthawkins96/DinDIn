@@ -28,9 +28,10 @@ namespace DinDin.Controllers
         }
 
         [HttpGet("{groupId}", Name = "GetGroup")]
-        public async Task<IActionResult> GetGroup(int groupId)
+        public IActionResult GetGroup(int groupId)
         {
-            return Ok(await _groupRepo.Find(groupId));
+            var group = _groupRepo.Find(groupId);
+            return Ok(_mapper.Map<GroupDto>(group));
         }
 
         [HttpPost]

@@ -19,4 +19,8 @@ export class GroupClientService {
   delete(groupId: number) {
     return this.httpClient.delete(`${this.groupApiUrl}/${groupId}`);
   }
+
+  get(groupId: number) {
+    return this.httpClient.get<Group>(`${this.groupApiUrl}/${groupId}`);
+  }
 }

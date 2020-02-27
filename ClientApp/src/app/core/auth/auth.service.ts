@@ -32,6 +32,11 @@ export class AuthService {
     this.isLoggedIn.next(false);
   }
 
+  setToken(token: string): void {
+    this.decodedToken = this.jwtHelper.decodeToken(token);
+    localStorage.setItem('token', token);
+  }
+
   autoLogin(): void {
     const token = localStorage.getItem('token');
     const isTokenExpired = this.jwtHelper.isTokenExpired(token);
