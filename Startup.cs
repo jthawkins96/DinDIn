@@ -55,6 +55,7 @@ namespace DinDin
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
 
             services.AddControllersWithViews();
 

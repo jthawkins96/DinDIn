@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { CoreModule } from './core/core.module';
 import { HomeModule } from './modules/home/home.module';
 import { VoteModule } from './modules/vote/vote.module';
-import { AdminModule } from './modules/admin/admin.module';
+import { RecipeModule } from './modules/recipe/recipe.module';
 import { GroupModule } from './modules/group/group.module';
 import { AppRoutingModule } from './app-routing.module';
 
@@ -22,7 +22,7 @@ import { AppRoutingModule } from './app-routing.module';
     CoreModule,
     HomeModule,
     VoteModule,
-    AdminModule,
+    RecipeModule,
     GroupModule,
     AppRoutingModule
   ],

@@ -1,13 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, FormArray } from '@angular/forms';
 
 @Component({
-  selector: 'app-add-recipe-form',
-  templateUrl: './add-recipe-form.component.html',
-  styleUrls: ['./add-recipe-form.component.scss']
+  selector: 'app-recipe-form',
+  templateUrl: './recipe-form.component.html',
+  styleUrls: ['./recipe-form.component.scss']
 })
-export class AddRecipeFormComponent implements OnInit {
+export class RecipeFormComponent implements OnInit {
   form: FormGroup;
+  @Output() formSubmitted = new EventEmitter<FormGroup>();
 
   get ingredientsFormArray() {
     return this.form.get('ingredients') as FormArray;
@@ -36,10 +37,11 @@ export class AddRecipeFormComponent implements OnInit {
   }
 
   onRemoveIngredient(index: number): void {
-    this.ingredients.splice(index, 1);
+    this.ingredientsFormArray.removeAt(index);
   }
 
   onSubmit() {
-    console.log(this.form);
+    this.formSubmitted.emit(this.form);
   }
 }
+

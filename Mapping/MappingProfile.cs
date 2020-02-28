@@ -30,6 +30,10 @@ namespace DinDin.Mapping
 
             CreateMap<UserGroup, GroupRoleDto>()
                 .ForMember(dest => dest.Name, src => src.MapFrom(g => g.Group.Name));
+
+            CreateMap<Recipe, RecipeDto>().ReverseMap();
+
+            CreateMap<Ingredient, IngredientDto>().ReverseMap();
         }
     }
 }
