@@ -15,4 +15,11 @@ export class RecipeClientService {
     return this.httpClient.post(this.recipeApiUrl, recipe);
   }
 
+  updateRecipe(recipe: Recipe) {
+    return this.httpClient.put(this.recipeApiUrl, recipe);
+  }
+
+  getRecipe(recipeId: number) {
+    return this.httpClient.get<Recipe>(`${this.recipeApiUrl}/${recipeId}`);
+  }
 }

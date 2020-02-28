@@ -4,14 +4,16 @@ using DinDin.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DinDin.Migrations
 {
     [DbContext(typeof(DinDinContext))]
-    partial class DinDinContextModelSnapshot : ModelSnapshot
+    [Migration("20200228210957_Added_CreationDate_And_LastUpdatedDate_To_Recipe_Table")]
+    partial class Added_CreationDate_And_LastUpdatedDate_To_Recipe_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -62,7 +64,7 @@ namespace DinDin.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("RecipeId")
+                    b.Property<int?>("RecipeId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
@@ -323,11 +325,9 @@ namespace DinDin.Migrations
 
             modelBuilder.Entity("DinDin.Core.Models.Ingredient", b =>
                 {
-                    b.HasOne("DinDin.Core.Models.Recipe", "Recipe")
+                    b.HasOne("DinDin.Core.Models.Recipe", null)
                         .WithMany("Ingredients")
-                        .HasForeignKey("RecipeId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("RecipeId");
                 });
 
             modelBuilder.Entity("DinDin.Core.Models.Recipe", b =>

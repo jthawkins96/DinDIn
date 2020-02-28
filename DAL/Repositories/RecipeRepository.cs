@@ -1,5 +1,6 @@
 ﻿using DinDin.Core.Contracts;
 using DinDin.Core.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,9 +19,26 @@ namespace DinDin.DAL.Repositories
 
         public Recipe AddRecipe(Recipe newRecipe)
         {
+            newRecipe.CreatedDate = DateTime.Now;
             _dbContext.Recipes.Add(newRecipe);
             _dbContext.SaveChanges();
             return newRecipe;
+        }
+
+        public Recipe GetRecipe(int recipeId, bool includeIngredients = false)
+        {
+            if (includeIngredients)
+                return _dbContext.Recipes
+                    .Include(r => r.Ingredients)
+                    .FirstOrDefault(r => r.Id == recipeId);
+
+            return _dbContext.Recipes.Find(recipeId);
+        }
+
+        public void Update(Recipe recipeToUpdate)
+        {
+            recipeToUpdate.LastUpdatedDate = DateTime.Now;
+            _dbContext.SaveChanges();
         }
     }
 }

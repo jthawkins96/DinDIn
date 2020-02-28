@@ -12,5 +12,7 @@ namespace DinDin.Core.Models
         public string UserId { get; set; }
         public User User { get; set; }
         public ICollection<Ingredient> Ingredients { get; set; }
+        public DateTime CreatedDate { get; set; }
+        public DateTime? LastUpdatedDate { get; set; }
     }
 }

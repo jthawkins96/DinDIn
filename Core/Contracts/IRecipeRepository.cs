@@ -9,5 +9,7 @@ namespace DinDin.Core.Contracts
     public interface IRecipeRepository
     {
         Recipe AddRecipe(Recipe newRecipe);
+        Recipe GetRecipe(int recipeId, bool includeIngredients = false);
+        void Update(Recipe recipeToUpdate);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Security.Claims;
+﻿using System;
+using System.Security.Claims;
 using AutoMapper;
 using DinDin.Core.Contracts;
 using DinDin.Core.Models;
@@ -22,6 +23,14 @@ namespace DinDin.Controllers
             _mapper = mapper;
         }
 
+        [HttpGet("{recipeId}")]
+        public IActionResult GetRecipe(int recipeId)
+        {
+            var recipe = _recipeRepo.GetRecipe(recipeId, includeIngredients: true);
+            if (recipe != null) return Ok(_mapper.Map<RecipeDto>(recipe));
+            return NotFound();
+        }
+
         [HttpPost]
         public IActionResult AddRecipe(RecipeDto newRecipe)
         {
@@ -30,6 +39,16 @@ namespace DinDin.Controllers
             recipe.UserId = userId;
             var addedRecipe = _recipeRepo.AddRecipe(recipe);
             return Ok();
+        }
+
+        [HttpPut]
+        public IActionResult UpdateRecipe(UpdateRecipeDto updatedRecipe)
+        {
+            var recipe = _recipeRepo.GetRecipe(updatedRecipe.Id, includeIngredients: true);
+            if (recipe == null) return NotFound();
+            _mapper.Map(updatedRecipe, recipe);
+            _recipeRepo.Update(recipe);
+            return NoContent();
         }
     }
 }

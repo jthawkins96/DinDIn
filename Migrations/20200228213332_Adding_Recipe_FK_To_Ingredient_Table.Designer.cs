@@ -4,14 +4,16 @@ using DinDin.DAL;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DinDin.Migrations
 {
     [DbContext(typeof(DinDinContext))]
-    partial class DinDinContextModelSnapshot : ModelSnapshot
+    [Migration("20200228213332_Adding_Recipe_FK_To_Ingredient_Table")]
+    partial class Adding_Recipe_FK_To_Ingredient_Table
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
