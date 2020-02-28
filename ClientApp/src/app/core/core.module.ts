@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { HeaderComponent } from './header/header.component';
-import { CoreRoutingModule } from './core-routing.module';
 import { LoginComponent } from './auth/login/login.component';
 import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { RouterModule } from '@angular/router';
 
 
 
@@ -15,13 +15,12 @@ import { AuthInterceptorService } from './auth/auth-interceptor.service';
   declarations: [HeaderComponent, LoginComponent, RegisterComponent],
   imports: [
     CommonModule,
-    CoreRoutingModule,
     FormsModule,
-    SharedModule
+    SharedModule,
+    RouterModule
   ],
   exports: [
-    HeaderComponent,
-    CoreRoutingModule
+    HeaderComponent
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptorService, multi: true }

@@ -1,19 +1,18 @@
-﻿using Microsoft.AspNetCore.Identity;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace DinDin.Core.Models
 {
-    public class User : IdentityUser
+    public class Group
     {
-        public ICollection<UserRole> UserRoles { get; set; }
+        public int Id { get; set; }
+        public string Name { get; set; }
         public ICollection<UserGroup> UserGroups { get; set; }
 
-        public User()
+        public Group()
         {
-            UserRoles = new List<UserRole>();
             UserGroups = new List<UserGroup>();
         }
     }

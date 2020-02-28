@@ -1,0 +1,44 @@
+<ng-template #userTemplate let-user>
+  <div class="item">
+    <span class="ml-2" [innerHTML]="user.username"></span>
+  </div>
+</ng-template>
+
+<ng-template #notFoundTemplate let-notFound>
+  <div>No Users Found</div>
+</ng-template>
+
+<form [formGroup]="editGroupForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="name">Group Name</label>
+    <input formControlName="name" type="text" id="name" class="form-control" />
+  </div>
+  <div class="form-group">
+    <label>Add Member to group</label>
+    <ng-autocomplete
+      #userSearch
+      [data]="filteredUsers"
+      [searchKeyword]="keyword"
+      [itemTemplate]="userTemplate"
+      [notFoundTemplate]="notFoundTemplate"
+      (selected)="onSelect($event)"
+      (inputChanged)="onChange($event)"
+      (inputCleared)="onClear($event)"
+      placeHolder="Enter the user's name"
+    ></ng-autocomplete>
+    <button class="btn btn-success mt-2" type="button" *ngIf="showAddMemberButton" (click)="addMember()">
+      Add Member
+    </button>
+  </div>
+  <div class="my-3" *ngIf="currentMembers.length > 0">
+    <h4>Members</h4>
+    <hr />
+    <ul class="list-group" *ngFor="let member of currentMembers; let i = index">
+      <li class="list-group-item d-flex justify-content-between">
+        {{ member.username }}
+        <i class="far fa-trash-alt" (click)="deleteMember(member.userId, i)"></i>
+      </li>
+    </ul>
+  </div>
+  <button type="submit" class="btn btn-primary">Update Group</button>
+</form>

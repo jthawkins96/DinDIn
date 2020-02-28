@@ -55,6 +55,12 @@
     <Compile Remove="Migrations\20200225155120_Initial_Migration.Designer.cs" />
     <Compile Remove="Migrations\20200225155246_Initial_Migration.cs" />
     <Compile Remove="Migrations\20200225155246_Initial_Migration.Designer.cs" />
+    <Compile Remove="Migrations\20200227152054_Added_Group_Table.cs" />
+    <Compile Remove="Migrations\20200227152054_Added_Group_Table.Designer.cs" />
+    <Compile Remove="Migrations\20200227155340_Seeding_Roles_Table.cs" />
+    <Compile Remove="Migrations\20200227155340_Seeding_Roles_Table.Designer.cs" />
+    <Compile Remove="Migrations\20200227162051_Added_GroupRole_Table.cs" />
+    <Compile Remove="Migrations\20200227162051_Added_GroupRole_Table.Designer.cs" />
   </ItemGroup>
 
   <Target Name="DebugEnsureNodeEnv" BeforeTargets="Build" Condition=" '$(Configuration)' == 'Debug' And !Exists('$(SpaRoot)node_modules') ">
