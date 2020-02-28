@@ -12,5 +12,8 @@ namespace DinDin.Core.Contracts
         Group Find(int groupId);
         void Delete(int groupId);
         bool UserIsOwner(int groupId, string userId);
+        bool UpdateGroup(Group groupToUpdate);
+        UserGroup AddUser(UserGroup newUser);
+        bool DeleteUserFromGroup(int groupId, string userId);
     }
 }

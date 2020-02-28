@@ -8,7 +8,6 @@
   <div>No Users Found</div>
 </ng-template>
 
-
 <form [formGroup]="editGroupForm" (ngSubmit)="onSubmit()">
   <div class="form-group">
     <label for="name">Group Name</label>
@@ -31,13 +30,15 @@
       Add Member
     </button>
   </div>
-  <div class="my-3" *ngIf="members.controls.length > 0">
+  <div class="my-3" *ngIf="currentMembers.length > 0">
     <h4>Members</h4>
     <hr />
-    <ul class="list-group" *ngFor="let member of currentMemberUsernames; let i = index">
-      <li class="list-group-item">{{ member }}</li>
+    <ul class="list-group" *ngFor="let member of currentMembers; let i = index">
+      <li class="list-group-item d-flex justify-content-between">
+        {{ member.username }}
+        <i class="far fa-trash-alt" (click)="deleteMember(member.userId, i)"></i>
+      </li>
     </ul>
   </div>
   <button type="submit" class="btn btn-primary">Update Group</button>
 </form>
-

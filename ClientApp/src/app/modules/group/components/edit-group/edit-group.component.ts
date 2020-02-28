@@ -7,6 +7,9 @@ import { User } from 'src/app/shared/models/user.model';
 import { BehaviorSubject, of } from 'rxjs';
 import { UserClientService } from 'src/app/core/services/user-client.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { Group } from 'src/app/shared/models/group.model';
+import { AlertifyService } from 'src/app/core/services/alertify.service';
+import { GroupUser } from 'src/app/shared/models/group-user.model';
 
 @Component({
   selector: 'app-edit-group',
@@ -14,33 +17,33 @@ import { AuthService } from 'src/app/core/auth/auth.service';
   styleUrls: ['./edit-group.component.scss']
 })
 export class EditGroupComponent implements OnInit {
-  @ViewChild('userSearch', { static: false }) userSearch;
   editGroupForm: FormGroup;
+
+  currentMembers: GroupUser[] = [];
+  currentUserToken;
+  groupId: number;
+
+  //autcomplete control
+  @ViewChild('userSearch', { static: false }) userSearch;
   searchTerm$ = new BehaviorSubject<string>('');
   filteredUsers: User[] = [];
   keyword = 'username';
   selectedMember: User;
-  currentMemberUsernames: string[] = [];
   showAddMemberButton = false;
-  currentUserToken;
-
-  get members() {
-    return this.editGroupForm.controls.members as FormArray;
-  }
 
   constructor(
     private groupClient: GroupClientService,
     private route: ActivatedRoute,
     private userClient: UserClientService,
-    private authService: AuthService
+    private authService: AuthService,
+    private alertifyService: AlertifyService
   ) {}
 
   ngOnInit() {
     this.currentUserToken = this.authService.decodedToken;
 
     this.editGroupForm = new FormGroup({
-      name: new FormControl(null, Validators.required),
-      members: new FormArray([])
+      name: new FormControl(null, Validators.required)
     });
 
     this.route.params
@@ -50,15 +53,12 @@ export class EditGroupComponent implements OnInit {
         })
       )
       .subscribe(response => {
-        const currentMembers = response.members.filter(member => member.roleId !== 1);
-        const currentMemberControls = new FormArray(currentMembers.map(member => new FormControl(member.userId)))
-        this.currentMemberUsernames = currentMembers.map(member => member.username)
+        this.groupId = response.id;
+        const members = response.members.filter(member => member.roleId !== 1);
+        this.currentMembers = members;
         this.editGroupForm.patchValue({
           name: response.name
         });
-        this.editGroupForm.setControl("members", currentMemberControls);
-
-        console.log(this.members)
       });
 
     this.searchTerm$
@@ -70,8 +70,10 @@ export class EditGroupComponent implements OnInit {
         })
       )
       .subscribe((users: User[]) => {
+        const currentMemberUsernames = this.currentMembers.map(member => member.username);
         this.filteredUsers = users.filter(
-          user => this.currentMemberUsernames.indexOf(user.username) < 0 && user.username !== this.currentUserToken.unique_name
+          user =>
+            currentMemberUsernames.indexOf(user.username) < 0 && user.username !== this.currentUserToken.unique_name
         );
       });
   }
@@ -83,9 +85,33 @@ export class EditGroupComponent implements OnInit {
 
   addMember() {
     this.resetAutocompleteControl();
-    this.members.push(new FormControl(this.selectedMember.id));
-    this.currentMemberUsernames.push(this.selectedMember.username);
+    const addedMember = {
+      groupId: this.groupId,
+      userId: this.selectedMember.id,
+      roleId: 2,
+      username: this.selectedMember.username
+    };
     this.showAddMemberButton = false;
+    this.groupClient.addMemberToGroup(addedMember).subscribe(
+      _ => {
+        this.alertifyService.success('Member was added to the group!');
+        this.currentMembers.push(addedMember);
+      },
+      error => {
+        console.log(error);
+        this.alertifyService.error('Unable to add member to group.');
+      }
+    );
+  }
+
+  deleteMember(userId: string, index: number) {
+    this.groupClient.deleteMember(this.groupId, userId).subscribe(response => {
+      this.alertifyService.success("Member was successfully deleted!");
+      this.currentMembers.splice(index, 1);
+    }, error => {
+      console.log(error);
+      this.alertifyService.error("Could not delete member from group.")
+    });
   }
 
   resetAutocompleteControl() {
@@ -104,6 +130,15 @@ export class EditGroupComponent implements OnInit {
   }
 
   onSubmit() {
-
+    const updatedName = this.editGroupForm.get('name').value;
+    this.groupClient.update({ id: this.groupId, name: updatedName }).subscribe(
+      _ => {
+        this.alertifyService.success('Group has been updated!');
+      },
+      error => {
+        console.log(error);
+        this.alertifyService.error('There was an error updating your group.');
+      }
+    );
   }
 }

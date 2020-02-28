@@ -50,5 +50,30 @@ namespace DinDin.Controllers
             _groupRepo.Delete(groupId);
             return NoContent();
         }
+
+        [HttpPut]
+        public IActionResult UpdateGroup(GroupDto groupToUpdate)
+        {
+            var group = _mapper.Map<Group>(groupToUpdate);
+            if (_groupRepo.UpdateGroup(group))
+                return Ok();
+            return BadRequest();
+        }
+
+        [HttpPost("addMember")]
+        public IActionResult AddMemberToGroup(UserGroupDto userToAdd)
+        {
+            var user = _mapper.Map<UserGroup>(userToAdd);
+            var addedUser = _groupRepo.AddUser(user);
+            return Ok(addedUser);
+        }
+
+        [HttpDelete("deleteMember/{groupId}/{userId}")]
+        public IActionResult DeleteMemberFromGroup(int groupId, string userId)
+        {
+            var isSuccessful = _groupRepo.DeleteUserFromGroup(groupId, userId);
+            if (isSuccessful) return NoContent();
+            return NotFound();
+        }
     }
 }

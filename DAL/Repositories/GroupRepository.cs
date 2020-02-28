@@ -45,5 +45,38 @@ namespace DinDin.DAL.Repositories
             var userGroups = _dbContext.UserGroup.Where(ug => ug.UserId == userId && ug.GroupId == groupId && ug.RoleId == 1);
             return userGroups.ToList().Count > 0;
         }
+
+        public bool UpdateGroup(Group groupToUpdate)
+        {
+            var group = _dbContext.Groups.Find(groupToUpdate.Id);
+            if (group != null)
+            {
+                group.Name = groupToUpdate.Name;
+                _dbContext.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
+
+        public UserGroup AddUser(UserGroup newUser)
+        {
+            _dbContext.UserGroup.Add(newUser);
+            _dbContext.SaveChanges();
+            return newUser;
+        }
+
+        public bool DeleteUserFromGroup(int groupId, string userId)
+        {
+            var userGroup = _dbContext.UserGroup.FirstOrDefault(ug => ug.GroupId == groupId && ug.UserId == userId);
+            if (userGroup != null)
+            {
+                _dbContext.Remove(userGroup);
+                _dbContext.SaveChanges();
+                return true;
+            }
+
+            return false;
+        }
     }
 }
