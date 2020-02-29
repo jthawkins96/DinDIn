@@ -47,6 +47,15 @@ namespace DinDin.Mapping
                                             .Where(ingredient => !r.Ingredients.Select(i => i.Id).Contains(ingredient.Id))
                                             .Select(ingDto => new Ingredient { Name = ingDto.Name, Amount = ingDto.Amount }).ToList();
 
+                    var currentIngredients = r.Ingredients.Where(ingredient => ur.Ingredients.Select(i => i.Id).Contains(ingredient.Id));
+
+                    foreach(var i in currentIngredients)
+                    {
+                        var updatedIngredient = ur.Ingredients.Single(ingredient => ingredient.Id == i.Id);
+                        i.Name = updatedIngredient.Name;
+                        i.Amount = updatedIngredient.Amount;
+                    }
+
                     foreach(var i in removedIngredients)
                         r.Ingredients.Remove(i);
 
