@@ -75,5 +75,11 @@ namespace DinDin.Controllers
             if (isSuccessful) return NoContent();
             return NotFound();
         }
+
+        [HttpGet("CanEditGroup/{groupId}")]
+        public IActionResult CanEditGroup(int groupId)
+        {
+            return Ok(_groupRepo.CanEditGroup(User.FindFirst(ClaimTypes.NameIdentifier).Value, groupId));
+        }
     }
 }

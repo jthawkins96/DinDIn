@@ -78,5 +78,11 @@ namespace DinDin.DAL.Repositories
 
             return false;
         }
+
+        public bool CanEditGroup(string userId, int groupId)
+        {
+            var group = _dbContext.UserGroup.FirstOrDefault(ug => ug.GroupId == groupId && ug.UserId == userId && ug.RoleId == 1);
+            return group != null;
+        }
     }
 }

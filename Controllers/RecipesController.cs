@@ -62,5 +62,11 @@ namespace DinDin.Controllers
             _recipeRepo.Update(recipe);
             return NoContent();
         }
+
+        [HttpGet("CanEditRecipe/{recipeId}")]
+        public IActionResult CanEditRecipe(int recipeId)
+        {
+            return Ok(_recipeRepo.CanEditRecipe(User.FindFirst(ClaimTypes.NameIdentifier).Value, recipeId));
+        }
     }
 }

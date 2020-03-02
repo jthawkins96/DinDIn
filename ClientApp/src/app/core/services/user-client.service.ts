@@ -16,8 +16,8 @@ export class UserClientService {
     return this.httpClient.get<User[]>(`${this.membersBaseUrl}/FindUsers/${searchTerm}`);
   }
 
-  getGroups(userId: string) {
-    return this.httpClient.get<GroupRole[]>(`${this.membersBaseUrl}/GetGroups/${userId}`);
+  getGroups() {
+    return this.httpClient.get<GroupRole[]>(`${this.membersBaseUrl}/GetGroups`);
   }
 
 }

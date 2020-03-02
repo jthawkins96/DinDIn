@@ -51,5 +51,11 @@ namespace DinDin.DAL.Repositories
             recipeToUpdate.LastUpdatedDate = DateTime.Now;
             _dbContext.SaveChanges();
         }
+
+        public bool CanEditRecipe(string userId, int recipeId)
+        {
+            var recipe = _dbContext.Recipes.FirstOrDefault(r => r.Id == recipeId && r.UserId == userId);
+            return recipe != null;
+        }
     }
 }
