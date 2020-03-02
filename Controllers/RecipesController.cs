@@ -17,11 +17,13 @@ namespace DinDin.Controllers
     {
         private IRecipeRepository _recipeRepo;
         private IMapper _mapper;
+        private readonly IUserActivityLoggerGateway _userActivityLoggerGateway;
 
-        public RecipesController(IRecipeRepository recipeRepo, IMapper mapper)
+        public RecipesController(IRecipeRepository recipeRepo, IMapper mapper, IUserActivityLoggerGateway userActivityLoggerGateway)
         {
             _recipeRepo = recipeRepo;
             _mapper = mapper;
+            _userActivityLoggerGateway = userActivityLoggerGateway;
         }
 
         [HttpGet("{recipeId}")]
@@ -47,6 +49,7 @@ namespace DinDin.Controllers
             var recipe = _mapper.Map<Recipe>(newRecipe);
             recipe.UserId = userId;
             var addedRecipe = _recipeRepo.AddRecipe(recipe);
+            _userActivityLoggerGateway.PostUserActivity(new UserActivity { Activity = "Add recipe", UserId = userId, Timestamp = DateTime.Now });
             return Ok();
         }
 
