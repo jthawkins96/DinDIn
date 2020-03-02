@@ -35,6 +35,17 @@ namespace DinDin.DAL.Repositories
             return _dbContext.Recipes.Find(recipeId);
         }
 
+        public ICollection<Recipe> GetRecipes(string userId, bool includeIngredients = false)
+        {
+            if (includeIngredients)
+                return _dbContext.Users
+                    .Include(u => u.Recipes)
+                    .ThenInclude(r => r.Ingredients)
+                    .FirstOrDefault(u => u.Id == userId).Recipes;
+
+            return _dbContext.Users.Include(u => u.Recipes).FirstOrDefault(u => u.Id == userId).Recipes;
+        }
+
         public void Update(Recipe recipeToUpdate)
         {
             recipeToUpdate.LastUpdatedDate = DateTime.Now;

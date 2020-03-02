@@ -1,1 +1,26 @@
-<p>recipe-home works!</p>
+<div class="recipe-home-container">
+  <div class="d-flex justify-content-between">
+    <h3>My Recipes</h3>
+    <button type="button" class="btn btn-success" (click)="onAddRecipe()">Add Recipe</button>
+  </div>
+  <hr />
+  <div class="d-flex">
+    <!-- <ngx-datatable class="bootstrap" [rows]="recipeData" [columns]="columns"></ngx-datatable> -->
+    <ul class="list-group w-100">
+      <li class="list-group-item d-flex justify-content-between align-items-center recipe-header-container">
+        <div>Id</div>
+        <div>Name</div>
+        <div>Ingredients</div>
+        <div>Edit</div>
+      </li>
+      <li *ngFor="let recipe of recipeData" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>{{ recipe.id }}</div>
+        <div>{{ recipe.name }}</div>
+        <div>{{ recipe.ingredients }}</div>
+        <div>
+          <i class="fas fa-edit" (click)="onEdit(recipe.id)"></i>
+        </div>
+      </li>
+    </ul>
+  </div>
+</div>

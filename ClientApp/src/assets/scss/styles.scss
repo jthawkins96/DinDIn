@@ -1,6 +1,7 @@
 /* You can add global styles to this file, and also import other style files */
 
 /* Provide sufficient contrast against white background */
+@import "./ngx-datatable.scss";
 
 html {
   font-size: 14px;
@@ -26,6 +27,12 @@ code {
 
 .far {
   font-size: 1.25rem;
+}
+
+.fas.fa-edit {
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .error-message {

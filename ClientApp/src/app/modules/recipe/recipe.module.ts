@@ -8,6 +8,7 @@ import { RecipeHomeComponent } from './components/recipe-home/recipe-home.compon
 import { RecipeRoutingModule } from './recipe-routing.module';
 import { AddRecipeComponent } from './components/add-recipe/add-recipe.component';
 import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.component';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 
 
@@ -17,7 +18,8 @@ import { EditRecipeComponent } from './components/edit-recipe/edit-recipe.compon
     CommonModule,
     ReactiveFormsModule,
     SharedModule,
-    RecipeRoutingModule
+    RecipeRoutingModule,
+    NgxDatatableModule
   ],
   exports: [
     RecipeComponent

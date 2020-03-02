@@ -30,7 +30,6 @@ export class RecipeFormComponent implements OnInit {
     if (this.recipe) {
       const initialIngredients = this.recipe.ingredients.map(ingredient => {
         return new FormGroup({
-          id: new FormControl(ingredient.id),
           name: new FormControl(ingredient.name, Validators.required),
           amount: new FormControl(ingredient.amount, Validators.required)
         });

@@ -22,4 +22,8 @@ export class RecipeClientService {
   getRecipe(recipeId: number) {
     return this.httpClient.get<Recipe>(`${this.recipeApiUrl}/${recipeId}`);
   }
+
+  getRecipes(userId: string) {
+    return this.httpClient.get<Recipe[]>(`${this.recipeApiUrl}/GetRecipes/${userId}`);
+  }
 }

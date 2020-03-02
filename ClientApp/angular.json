@@ -30,9 +30,12 @@
             ],
             "styles": [
               "node_modules/bootstrap/scss/bootstrap.scss",
-              "src/assets/scss/styles.scss",
               "node_modules/alertifyjs/build/css/alertify.min.css",
-              "node_modules/alertifyjs/build/css/themes/bootstrap.min.css"
+              "node_modules/alertifyjs/build/css/themes/bootstrap.min.css",
+              "node_modules/@swimlane/ngx-datatable/index.scss",
+              "node_modules/@swimlane/ngx-datatable/themes/bootstrap.scss",
+              "node_modules/@swimlane/ngx-datatable/assets/icons.css",
+              "src/assets/scss/styles.scss"
             ],
             "scripts": []
           },

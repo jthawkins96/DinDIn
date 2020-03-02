@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Security.Claims;
 using AutoMapper;
 using DinDin.Core.Contracts;
@@ -28,6 +29,14 @@ namespace DinDin.Controllers
         {
             var recipe = _recipeRepo.GetRecipe(recipeId, includeIngredients: true);
             if (recipe != null) return Ok(_mapper.Map<RecipeDto>(recipe));
+            return NotFound();
+        }
+
+        [HttpGet("GetRecipes/{userId}")]
+        public IActionResult GetRecipes(string userId)
+        {
+            var recipe = _recipeRepo.GetRecipes(userId, includeIngredients: true);
+            if (recipe != null) return Ok(_mapper.Map<List<RecipeDto>>(recipe));
             return NotFound();
         }
 

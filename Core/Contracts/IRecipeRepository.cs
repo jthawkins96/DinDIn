@@ -11,5 +11,6 @@ namespace DinDin.Core.Contracts
         Recipe AddRecipe(Recipe newRecipe);
         Recipe GetRecipe(int recipeId, bool includeIngredients = false);
         void Update(Recipe recipeToUpdate);
+        ICollection<Recipe> GetRecipes(string userId, bool includeIngredients = false);
     }
 }
