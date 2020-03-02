@@ -34,10 +34,10 @@ namespace DinDin.Controllers
             return NotFound();
         }
 
-        [HttpGet("GetRecipes/{userId}")]
-        public IActionResult GetRecipes(string userId)
+        [HttpGet("GetRecipes")]
+        public IActionResult GetRecipes()
         {
-            var recipe = _recipeRepo.GetRecipes(userId, includeIngredients: true);
+            var recipe = _recipeRepo.GetRecipes(User.FindFirstValue(ClaimTypes.NameIdentifier), includeIngredients: true);
             if (recipe != null) return Ok(_mapper.Map<List<RecipeDto>>(recipe));
             return NotFound();
         }
@@ -45,7 +45,7 @@ namespace DinDin.Controllers
         [HttpPost]
         public IActionResult AddRecipe(RecipeDto newRecipe)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier).Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             var recipe = _mapper.Map<Recipe>(newRecipe);
             recipe.UserId = userId;
             var addedRecipe = _recipeRepo.AddRecipe(recipe);
@@ -66,7 +66,7 @@ namespace DinDin.Controllers
         [HttpGet("CanEditRecipe/{recipeId}")]
         public IActionResult CanEditRecipe(int recipeId)
         {
-            return Ok(_recipeRepo.CanEditRecipe(User.FindFirst(ClaimTypes.NameIdentifier).Value, recipeId));
+            return Ok(_recipeRepo.CanEditRecipe(User.FindFirstValue(ClaimTypes.NameIdentifier), recipeId));
         }
     }
 }

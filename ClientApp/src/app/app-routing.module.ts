@@ -11,7 +11,8 @@ const routes = [
   { path: '', component: HomeComponent, pathMatch: 'full' },
   { path: 'vote', component: VoteComponent, canActivate: [AuthGuard] },
   { path: 'login', component: LoginComponent },
-  { path: 'register', component: RegisterComponent }
+  { path: 'register', component: RegisterComponent },
+  { path: '**', redirectTo: '' }
 ];
 
 @NgModule({

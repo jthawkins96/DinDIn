@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { RecipeClientService } from 'src/app/core/services/recipe-client.service';
-import { AuthService } from 'src/app/core/auth/auth.service';
 import { RecipeData } from 'src/app/shared/models/recipe-data.model';
 import { AlertifyService } from 'src/app/core/services/alertify.service';
 import { Router, ActivatedRoute } from '@angular/router';
@@ -12,27 +11,24 @@ import { Router, ActivatedRoute } from '@angular/router';
 })
 export class RecipeHomeComponent implements OnInit {
   recipeData: RecipeData[] = [];
-  columns = [{ prop: 'id' }, { name: 'Name' }, { name: 'Ingredients' }, { prop: '' }];
+  // columns = [{ prop: 'id' }, { name: 'Name' }, { name: 'Ingredients' }, { prop: '' }];
   isLoading: boolean = true;
 
   constructor(
     private recipeClient: RecipeClientService,
-    private authService: AuthService,
     private alertifyService: AlertifyService,
     private router: Router,
     private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
-    const userId = this.authService.decodedToken.nameid;
-    this.recipeClient.getRecipes(userId).subscribe(
+    this.recipeClient.getRecipes().subscribe(
       recipes => {
         const recipeData = recipes.map(recipe => {
           return {
             id: recipe.id,
             name: recipe.name,
-            ingredients: recipe.ingredients.map(ingredient => ingredient.name).sort().join(','),
-            edit: '<i class="fas fa-edit"></i>'
+            ingredients: recipe.ingredients.map(ingredient => ingredient.name).sort().join(',')
           };
         });
         this.recipeData = recipeData;

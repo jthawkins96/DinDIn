@@ -16,7 +16,8 @@ const routes: Routes = [
     children: [
       { path: '', pathMatch: 'full', component: RecipeHomeComponent },
       { path: 'add-recipe', component: AddRecipeComponent },
-      { path: 'edit-recipe/:id', component: EditRecipeComponent, canActivate: [CanEditRecipeGuard] }
+      { path: 'edit-recipe/:id', component: EditRecipeComponent, canActivate: [CanEditRecipeGuard] },
+      { path: '**', redirectTo: '' }
     ]
   }
 ];

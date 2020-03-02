@@ -23,7 +23,11 @@ export class RecipeClientService {
     return this.httpClient.get<Recipe>(`${this.recipeApiUrl}/${recipeId}`);
   }
 
-  getRecipes(userId: string) {
-    return this.httpClient.get<Recipe[]>(`${this.recipeApiUrl}/GetRecipes/${userId}`);
+  getRecipes() {
+    return this.httpClient.get<Recipe[]>(`${this.recipeApiUrl}/GetRecipes`);
+  }
+
+  canEditRecipe(recipeId: number) {
+    return this.httpClient.get<boolean>(`${this.recipeApiUrl}/CanEditRecipe/${recipeId}`);
   }
 }

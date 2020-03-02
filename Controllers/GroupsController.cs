@@ -45,7 +45,7 @@ namespace DinDin.Controllers
         [HttpDelete("{groupId}")]
         public IActionResult DeleteGroup(int groupId)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!_groupRepo.UserIsOwner(groupId, userId)) return Unauthorized();
             _groupRepo.Delete(groupId);
             return NoContent();
