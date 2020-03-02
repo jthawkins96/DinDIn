@@ -5,6 +5,7 @@ using DinDin.DAL;
 using DinDin.DAL.Repositories;
 using DinDin.Hubs;
 using DinDin.Mapping;
+using DinDin.Web;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Builder;
@@ -55,6 +56,8 @@ namespace DinDin
             services.AddScoped<IAuthRepository, AuthRepository>();
             services.AddScoped<IUserRepository, UserRepository>();
             services.AddScoped<IGroupRepository, GroupRepository>();
+            services.AddScoped<IRecipeRepository, RecipeRepository>();
+            services.AddScoped<IUserActivityLoggerGateway, UserActivityLoggerGateway>();
 
             services.AddControllersWithViews();
 

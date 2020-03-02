@@ -3,6 +3,8 @@ import { HttpClient } from '@angular/common/http';
 import { Group } from 'src/app/shared/models/group.model';
 import { environment } from 'src/environments/environment';
 import { GroupUser } from 'src/app/shared/models/group-user.model';
+import { AuthService } from '../auth/auth.service';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -35,5 +37,9 @@ export class GroupClientService {
 
   addMemberToGroup(member: GroupUser) {
     return this.httpClient.post(`${this.groupApiUrl}/addMember`, member);
+  }
+
+  canEditGroup(groupId: number): Observable<boolean> {
+    return this.httpClient.get<boolean>(`${this.groupApiUrl}/CanEditGroup/${groupId}`);
   }
 }

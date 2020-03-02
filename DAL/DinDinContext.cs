@@ -15,6 +15,9 @@ namespace DinDin.DAL
     {
         public DbSet<Group> Groups { get; set; }
         public DbSet<UserGroup> UserGroup { get; set; }
+        public DbSet<Recipe> Recipes { get; set; }
+        public DbSet<Ingredient> Ingredients { get; set; }
+        public DbSet<UserActivity> UserActivities { get; set; }
 
         public DinDinContext(DbContextOptions<DinDinContext> options)
             : base(options)

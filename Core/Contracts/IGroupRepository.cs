@@ -15,5 +15,6 @@ namespace DinDin.Core.Contracts
         bool UpdateGroup(Group groupToUpdate);
         UserGroup AddUser(UserGroup newUser);
         bool DeleteUserFromGroup(int groupId, string userId);
+        bool CanEditGroup(string userId, int groupId);
     }
 }

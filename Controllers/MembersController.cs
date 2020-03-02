@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using AutoMapper;
 using DinDin.Core.Contracts;
@@ -39,10 +40,10 @@ namespace DinDin.Controllers
             return Ok(_mapper.Map<List<UserDto>>(users));
         }
 
-        [HttpGet("GetGroups/{userId}")]
-        public IActionResult GetGroups(string userId)
+        [HttpGet("GetGroups")]
+        public IActionResult GetGroups()
         {
-            var userGroups = _userRepo.GetGroups(userId);
+            var userGroups = _userRepo.GetGroups(User.FindFirst(ClaimTypes.NameIdentifier).Value);
             return Ok(_mapper.Map<List<GroupRoleDto>>(userGroups));
         }
     }

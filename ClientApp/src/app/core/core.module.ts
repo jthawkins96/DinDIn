@@ -6,7 +6,7 @@ import { RegisterComponent } from './auth/register/register.component';
 import { FormsModule } from '@angular/forms';
 import { SharedModule } from '../shared/shared.module';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { AuthInterceptorService } from './auth/auth-interceptor.service';
+import { AuthInterceptorService } from './interceptors/auth-interceptor.service';
 import { RouterModule } from '@angular/router';
 
 

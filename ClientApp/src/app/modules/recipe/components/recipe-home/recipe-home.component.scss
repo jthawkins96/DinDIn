@@ -1,0 +1,15 @@
+.list-group-item {
+  div {
+    &:not(:last-child) {
+      flex-basis: 25%;
+    }
+    &:last-child {
+      flex-basis: 5%;
+    }
+  }
+}
+
+.recipe-header-container {
+  font-weight: bold;
+  border-bottom: 1px solid;
+}

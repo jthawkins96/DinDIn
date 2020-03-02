@@ -51,7 +51,7 @@ export class GroupHomeComponent implements OnInit {
   }
 
   getGroups() {
-    this.userClient.getGroups(this.userId).subscribe(groups => {
+    this.userClient.getGroups().subscribe(groups => {
       this.groups = groups;
     });
   }

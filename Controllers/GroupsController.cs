@@ -45,7 +45,7 @@ namespace DinDin.Controllers
         [HttpDelete("{groupId}")]
         public IActionResult DeleteGroup(int groupId)
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
             if (!_groupRepo.UserIsOwner(groupId, userId)) return Unauthorized();
             _groupRepo.Delete(groupId);
             return NoContent();
@@ -74,6 +74,12 @@ namespace DinDin.Controllers
             var isSuccessful = _groupRepo.DeleteUserFromGroup(groupId, userId);
             if (isSuccessful) return NoContent();
             return NotFound();
+        }
+
+        [HttpGet("CanEditGroup/{groupId}")]
+        public IActionResult CanEditGroup(int groupId)
+        {
+            return Ok(_groupRepo.CanEditGroup(User.FindFirst(ClaimTypes.NameIdentifier).Value, groupId));
         }
     }
 }

@@ -1,0 +1,4 @@
+<div>
+  <div *ngIf="!isLoading"><app-recipe-form [recipe]="recipe" (formSubmitted)="onSubmit($event)"></app-recipe-form></div>
+  <div *ngIf="isLoading">Loading...</div>
+</div>
