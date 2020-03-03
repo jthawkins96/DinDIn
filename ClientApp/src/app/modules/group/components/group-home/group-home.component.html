@@ -6,6 +6,9 @@
 <ul class="list-group">
   <li class="list-group-item d-flex justify-content-between" *ngFor="let group of groups">
     <span>{{ group.name }}</span>
+    <div *ngIf="group.roleId !== 1">
+      <i class="fas fa-vote-yea" (click)="onVote(group.groupId)"></i>
+    </div>
     <div *ngIf="group.roleId === 1">
       <i class="fas fa-edit mr-3" (click)="editGroup(group.groupId)"></i>
       <i class="far fa-trash-alt" (click)="deleteGroup(group.groupId, group.name)"></i>

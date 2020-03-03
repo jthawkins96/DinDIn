@@ -28,7 +28,7 @@ export class RecipeHomeComponent implements OnInit {
           return {
             id: recipe.id,
             name: recipe.name,
-            ingredients: recipe.ingredients.map(ingredient => ingredient.name).sort().join(',')
+            ingredients: recipe.ingredients.map(ingredient => ingredient.name).sort().join(', ')
           };
         });
         this.recipeData = recipeData;
