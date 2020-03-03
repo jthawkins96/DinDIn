@@ -18,6 +18,8 @@ namespace DinDin.DAL
         public DbSet<Recipe> Recipes { get; set; }
         public DbSet<Ingredient> Ingredients { get; set; }
         public DbSet<UserActivity> UserActivities { get; set; }
+        public DbSet<VotingSetItem> VotingSetItems { get; set; }
+        public DbSet<VotingSet> VotingSets { get; set; }
 
         public DinDinContext(DbContextOptions<DinDinContext> options)
             : base(options)

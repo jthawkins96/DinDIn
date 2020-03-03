@@ -1,0 +1,23 @@
+<div>
+  <div class="mb-5">
+    <h3>Selected Recipes</h3>
+    <hr>
+    <ul class="list-group">
+      <li *ngFor="let recipe of selectedRecipes; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>{{ recipe.name }}</div>
+        <i class="far fa-trash-alt" (click)="onRemoveRecipe(i)"></i>
+      </li>
+    </ul>
+  </div>
+  <div class="mb-5">
+    <h3>My Recipes</h3>
+    <hr>
+    <ul class="list-group">
+      <li *ngFor="let recipe of unselectedRecipes; let i = index" class="list-group-item d-flex justify-content-between align-items-center">
+        <div>{{ recipe.name }}</div>
+        <button type="button" class="btn btn-success" (click)="onAddRecipe(i)" [disabled]="isVotingListFilled">Add Recipe</button>
+      </li>
+    </ul>
+  </div>
+  <button type="button" class="btn btn-primary" (click)="onSetForVoting()" [disabled]="!isVotingListFilled">Set For Voting</button>
+</div>

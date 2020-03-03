@@ -59,4 +59,8 @@ export class GroupHomeComponent implements OnInit {
   onVote(groupId: number) {
     this.router.navigate([`/vote/${groupId}`]);
   }
+
+  onManage(groupId: number) {
+    this.router.navigate([`manage/${groupId}`], { relativeTo: this.route });
+  }
 }
